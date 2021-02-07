@@ -29,6 +29,6 @@ const pollSchema = new Schema(
   }
 );
 
-const Blog = mongoose.model("poll", pollSchema);
+const Poll = mongoose.model("poll", pollSchema);
 
-export default Blog;
+export default Poll;
