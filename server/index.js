@@ -13,7 +13,10 @@ const app = express();
 mongoose
   .connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => console.log("connected to db"))
-  .catch((error) => console.log("something went wrong ", error));
+  .catch((error) => {
+    console.log("something went wrong ", error);
+    process.exit();
+  });
 
 const port = process.env.PORT || 8000;
 app.set("port", port);
