@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import index from "./routes";
 import { dbURL } from "./config/db.config";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
 
 import { listenForEvents } from "./events";
 import { listenForInteractions } from "./integrations";
@@ -33,6 +35,10 @@ const port = process.env.PORT || 8000;
 app.set("port", port);
 
 app.use(logger("dev"));
+
+// API Docs
+const swaggerDocument = YAML.load(`${process.cwd()}/server/swagger.yaml`);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

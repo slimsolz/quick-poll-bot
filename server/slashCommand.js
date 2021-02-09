@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import cors from "cors";
 import { polls } from "./polls";
 import Poll from "./models/poll";
 import { currentUserId } from "./helpers/responseUtil";
@@ -6,6 +7,7 @@ import { currentUserId } from "./helpers/responseUtil";
 export const listenForCommands = async function (app) {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(cors());
 
   app.post("/slack/commands", async (req, res) => {
     const { token } = req.body;

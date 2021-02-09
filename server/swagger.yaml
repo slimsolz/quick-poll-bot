@@ -1,0 +1,50 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: quick-poll-bot api
+  description: API for getting users infomation
+  # My Contact Info
+  contact:
+    email: odumahs@gmail.com
+basePath: /api/v1
+
+# tags are used for organizing operations
+tags:
+- name: allPolls
+  description: Get all polls Route
+- name: deletePolls
+  description: Delete all polls route
+
+
+paths:
+  /polls:
+    get:
+      tags:
+      - allPolls
+      summary: Get all polls Route
+      description: displays all polls taken
+      produces:
+      - application/json
+      responses:
+        200:
+          description: all polls
+          examples:
+            application/json:
+              status: success
+              message: 'poll retrieved successfully'
+              data: []
+    delete:
+      tags:
+      - deletePolls
+      summary: Delete all polls route
+      description: Delete all polls
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Success, polls deleted
+          examples:
+            application/json:
+              status: success
+              message: polls deleted successfully.
+              data: []
