@@ -5,7 +5,7 @@ import PollController from "../controllers/PollController";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  successResponse(res, 200, "My quick-poll-bot API");
+  successResponse(res, 200, "Welcome to quick-poll-bot API");
 });
 
 router.get("/polls", PollController.getAllPolls);
