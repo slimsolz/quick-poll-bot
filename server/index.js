@@ -7,6 +7,7 @@ import { dbURL } from "./config/db.config";
 
 import { listenForEvents } from "./events";
 import { listenForInteractions } from "./integrations";
+import { listenForCommands } from "./slashCommand";
 
 require("express-async-errors");
 
@@ -14,6 +15,7 @@ const app = express();
 
 listenForEvents(app);
 listenForInteractions(app);
+listenForCommands(app);
 
 // connect to mongodb
 mongoose
