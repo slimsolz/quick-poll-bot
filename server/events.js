@@ -1,6 +1,8 @@
 import { createEventAdapter } from "@slack/events-api";
 import { WebClient } from "@slack/web-api";
 import { polls } from "./polls";
+import Poll from "./models/poll";
+import { currentUserId } from "./helpers/responseUtil";
 
 const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
@@ -23,6 +25,9 @@ export const listenForEvents = (app) => {
 
 export const respondToEvent = async (channelId) => {
   try {
+    const pollData = new Poll({ userId: currentUserId });
+    await pollData.save();
+
     await web.chat.postMessage({
       channel: channelId,
       text: "",
