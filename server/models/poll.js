@@ -3,10 +3,6 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const pollSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-    },
     userFeeling: {
       type: String,
       required: true,

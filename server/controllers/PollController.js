@@ -6,10 +6,9 @@ class PollController {
   static async createPoll(req, res, next) {
     try {
       const pollData = new Poll({
-        username: "solz",
         userFeeling: "good",
-        userWalkTime: "09:30",
-        hobbies: ["basketball", "tennis"],
+        userWalkTime: "Monday 10:30",
+        hobbies: ["basketball", "tennis", "movies"],
         number: 890,
       });
       const newPoll = await pollData.save();
