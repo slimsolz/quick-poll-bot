@@ -6,8 +6,9 @@ class PollController {
   static async getAllPolls(req, res, next) {
     try {
       const polls = await Poll.find();
-      successResponse(res, 200, "poll retrieved successfully", polls);
+      return successResponse(res, 200, "poll retrieved successfully", polls);
     } catch (err) {
+      /* istanbul ignore next */
       next(err);
     }
   }
@@ -15,8 +16,9 @@ class PollController {
   static async deleteAllPolls(req, res, next) {
     try {
       await Poll.deleteMany({});
-      successResponse(res, 200, "polls deleted successfully", []);
+      return successResponse(res, 200, "polls deleted successfully", []);
     } catch (err) {
+      /* istanbul ignore next */
       next(err);
     }
   }

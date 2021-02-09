@@ -12,6 +12,7 @@ A slack bot to get information from users
 
 - Install NodeJS and yarn on your computer
 - Clone this repository using git clone `https://github.com/slimsolz/quick-poll-bot.git`
+- Use the .env.sample file to setup your environmental variables and rename the file to .env
 - Run `npm install` or `yarn install` to install all dependencies
 - Run `npm run start-dev` or `yarn start-dev` to start the server locally
 - Run `npm run build` or `yarn build` to build the project for production
@@ -31,9 +32,13 @@ A slack bot to get information from users
 
 - run `npm test` or `yarn test`, This will run test with code coverage
 
+## Using the Live App
+
+-   The live application is hosted at `https://quick-poll-bot.herokuapp.com/api/v1/` (note: don't for get to include `/api/v1/` when a request to an endpoint)
+
 ## Documentation
 
-- Find app documentation at ``
+- Find app documentation at `https://quick-poll-bot.herokuapp.com/api-docs`
 
 ## Technologies
 
