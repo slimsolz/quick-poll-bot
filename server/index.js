@@ -5,9 +5,15 @@ import mongoose from "mongoose";
 import index from "./routes";
 import { dbURL } from "./config/db.config";
 
+import { listenForEvents } from "./events";
+import { listenForInteractions } from "./integrations";
+
 require("express-async-errors");
 
 const app = express();
+
+listenForEvents(app);
+listenForInteractions(app);
 
 // connect to mongodb
 mongoose
