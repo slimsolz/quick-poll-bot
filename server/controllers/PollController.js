@@ -3,17 +3,19 @@ import { errorResponse, successResponse } from "../helpers/responseUtil";
 import "babel-polyfill";
 
 class PollController {
-  static async createPoll(req, res, next) {
+  static async getAllPolls(req, res, next) {
     try {
-      const pollData = new Poll({
-        username: "solz",
-        userFeeling: "good",
-        userWalkTime: "09:30",
-        hobbies: ["basketball", "tennis"],
-        number: 890,
-      });
-      const newPoll = await pollData.save();
-      successResponse(res, 201, "poll created successfully", newPoll);
+      const polls = await Poll.find();
+      successResponse(res, 200, "poll retrieved successfully", polls);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async deleteAllPolls(req, res, next) {
+    try {
+      await Poll.deleteMany({});
+      successResponse(res, 200, "polls deleted successfully", []);
     } catch (err) {
       next(err);
     }

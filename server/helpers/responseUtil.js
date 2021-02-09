@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 /**
  * Error response
  *
@@ -27,3 +29,5 @@ export const successResponse = (response, statusCode, message, data) =>
     message,
     data,
   });
+
+export const currentUserId = uuidv4();

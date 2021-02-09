@@ -1,6 +1,8 @@
 import { createMessageAdapter } from "@slack/interactive-messages";
 import { WebClient } from "@slack/web-api";
 import { polls } from "./polls";
+import { currentUserId } from "./helpers/responseUtil";
+import Poll from "./models/poll";
 
 const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_BOT_TOKEN;
@@ -27,6 +29,12 @@ slackInteractions.action({ type: "multi_static_select" }, async (payload) => {
 
   if (responseData.length > 0) {
     try {
+      console.log(responseData);
+      const res = await Poll.findOneAndUpdate(
+        { userId: currentUserId },
+        { $set: { hobbies: responseData } }
+      );
+      console.log(res);
       await web.views.open({
         trigger_id: payload.trigger_id,
         view: polls.forthQuestion,
@@ -52,6 +60,10 @@ slackInteractions.viewSubmission(
 
     if (walkDay && walkTime) {
       try {
+        await Poll.findOneAndUpdate(
+          { userId: currentUserId },
+          { userWalkTime: `${walkDay} at ${walkTime}` }
+        );
         await web.chat.postMessage({
           channel: channelId.id,
           text: "",
@@ -88,6 +100,10 @@ slackInteractions.viewSubmission("number_modal_submit", async (payload) => {
     };
   } else {
     try {
+      await Poll.findOneAndUpdate(
+        { userId: currentUserId },
+        { number: numberInput }
+      );
       await web.chat.postMessage({
         channel: channelId.id,
         text: "",
@@ -111,6 +127,10 @@ const respondToSelectDropdown = async (payload) => {
 
   if (id === "greeting") {
     try {
+      await Poll.findOneAndUpdate(
+        { userId: currentUserId },
+        { userFeeling: selectedOption }
+      );
       await web.views.open({
         trigger_id: payload.trigger_id,
         view: polls.secondQuestion,
